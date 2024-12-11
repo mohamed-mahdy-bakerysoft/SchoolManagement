@@ -5,8 +5,9 @@ import { useSelector } from 'react-redux';
 
 const AdminDashboard = () => {
   const links = [
-    { label: 'Add User', path: '/admin/register' },
-    { label: 'Student Management', path: '/admin/students' },
+    { label: 'OfficeStaff Management', path: '/admin/OfficeStaff' },
+    { label: 'Librarian Management', path: '/admin/Librarian' },
+    { label: 'Student Management', path: '/students' },
     { label: 'Library Management', path: '/admin/library' },
     { label: 'Fees Management', path: '/admin/fees' },
   ];

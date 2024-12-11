@@ -14,6 +14,13 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate fields
+    if (!email || !password) {
+      setError('Email and Password are required.');
+      return;
+    }
+
     try {
       // Make the login request using the API utility
       const { user, token } = await apiLogin({ email, password });
@@ -24,7 +31,8 @@ const LoginPage = () => {
       // Redirect to the dashboard after login
       navigate('/dashboard');
     } catch (err) {
-      setError(err.message || 'Login failed');
+      console.error('Login error:', err);
+      setError(err.response?.data?.message || 'Login failed. Please try again.');
     }
   };
 
@@ -55,7 +63,10 @@ const LoginPage = () => {
           placeholder="Enter your password"
         />
 
-        <button type="submit" className="btn-primary w-full mt-4">
+        <button
+          type="submit"
+          className="btn-primary w-full mt-4"
+        >
           Login
         </button>
       </form>

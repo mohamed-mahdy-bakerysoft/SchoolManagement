@@ -6,6 +6,7 @@ const StaffDashboard = () => {
   const links = [
     { label: 'Manage Fees', path: '/staff/fees' },
     { label: 'Library Records', path: '/staff/library' },
+    { label: 'Manage Students', path: '/students' }
   ];
 
   return (

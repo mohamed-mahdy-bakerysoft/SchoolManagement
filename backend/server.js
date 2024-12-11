@@ -6,6 +6,9 @@ const authRoutes = require('./routes/authRoutes');
 const studentRoutes = require('./routes/studentRoutes');
 const libraryRoutes = require('./routes/libraryRoutes');
 const feesRoutes = require('./routes/feesRoutes');
+const staffRoutes = require('./routes/staffRoutes');
+
+
 
 // Load environment variables
 dotenv.config();
@@ -25,6 +28,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
 app.use('/api/library', libraryRoutes);
 app.use('/api/fees', feesRoutes);
+
+app.use('/api/staff', staffRoutes);
 
 // Error Handling
 app.use((err, req, res, next) => {

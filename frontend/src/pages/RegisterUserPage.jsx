@@ -9,6 +9,7 @@ const RegisterUserPage = () => {
     email: "",
     password: "",
     role: "",
+    staffId: "", // New field for staff ID
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -37,7 +38,7 @@ const RegisterUserPage = () => {
       // Call the register API with token authorization
       await register(formData, token);
       setSuccess(`User ${formData.role} registered successfully!`);
-      setFormData({ name: "", email: "", password: "", role: "" }); // Reset form
+      setFormData({ name: "", email: "", password: "", role: "", staffId: "" }); // Reset form
     } catch (err) {
       setError(err.message || "Registration failed");
     }
@@ -109,6 +110,20 @@ const RegisterUserPage = () => {
             <option value="Librarian">Librarian</option>
             <option value="admin">Admin</option>
           </select>
+        </div>
+
+        {/* New field for Staff ID */}
+        <div className="mb-4">
+          <label className="block mb-2">Staff ID</label>
+          <input
+            type="text"
+            name="staffId"
+            value={formData.staffId}
+            onChange={handleChange}
+            placeholder="Enter staff ID"
+            className="w-full p-2 border border-gray-300 rounded"
+            required
+          />
         </div>
 
         <button type="submit" className="btn-primary w-full">
