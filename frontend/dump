@@ -1,0 +1,37 @@
+frontend/
+├── public/
+│   └── vite.svg               # Vite logo (optional)
+├── src/
+│   ├── components/            # Reusable components
+│   │   ├── AdminDashboard/
+│   │   │   └── AdminDashboard.jsx
+│   │   ├── StaffDashboard/
+│   │   │   └── StaffDashboard.jsx
+│   │   ├── LibrarianDashboard/
+│   │   │   └── LibrarianDashboard.jsx
+│   │   ├── Student/
+│   │   │   ├── StudentForm.jsx
+│   │   │   ├── StudentList.jsx
+│   │   └── Shared/
+│   │       ├── Header.jsx
+│   │       ├── Sidebar.jsx
+│   │       └── ConfirmationModal.jsx
+│   ├── pages/                 # Route-level components
+│   │   ├── LoginPage.jsx
+│   │   ├── NotFoundPage.jsx
+│   └── redux/                 # Redux setup
+│       ├── store.js
+│       ├── slices/
+│       │   ├── authSlice.js
+│       │   ├── studentSlice.js
+│       │   ├── librarySlice.js
+│       │   └── feesSlice.js
+│   ├── utils/                 # Helper functions
+│   │   └── api.js
+│   ├── App.jsx                # Main App component
+│   ├── main.jsx               # Entry point
+│   ├── index.css              # TailwindCSS styles
+│   └── vite.config.js         # Vite configuration
+├── .env                       # Environment variables
+├── package.json               # Dependencies
+└── tailwind.config.js         # TailwindCSS configuration
