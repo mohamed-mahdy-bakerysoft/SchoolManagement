@@ -1,169 +1,159 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addStudent, updateStudent, setCurrentStudent, deleteStudent } from '../../redux/slices/studentSlice'; // Import actions
-import InputField from '../Shared/InputField';
-import { addStudent as apiAddStudent, updateStudent as apiUpdateStudent, deleteStudent as apiDeleteStudent } from '../../api/student'; // Import API functions
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { addStudent as apiAddStudent } from "../../api/student"; // Import the API function
+import { addStudent } from "../../redux/slices/studentSlice"; // Import addStudent action
+import { useDispatch } from "react-redux"; // Import useDispatch hook
+import InputField from "../Shared/InputField"; // Import InputField component
+import Layout from "../Layout/Layout";
 
-const StudentForm = ({ studentId }) => {
+const StudentForm = () => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token); // Get the token from the Redux store
-  const currentStudent = useSelector((state) => state.student.currentStudent);
+  const navigate = useNavigate(); // To redirect after adding the student
 
+  // State for the student data
   const [formData, setFormData] = useState({
-    name: '',
-    class: '',
-    contact: '',
-    admissionNumber: '',
-    location: '',
-    image: '',
+    name: "",
+    class: "",
+    contact: "",
+    studentId: "",
+    location: "",
   });
 
-  // If editing, pre-fill form with current student data
-  useEffect(() => {
-    if (studentId && currentStudent) {
-      setFormData({
-        name: currentStudent.name || '',
-        class: currentStudent.class || '',
-        contact: currentStudent.contact || '',
-        admissionNumber: currentStudent.admissionNumber || '',
-        location: currentStudent.location || '',
-        image: currentStudent.image || '',
-      });
-    }
-  }, [studentId, currentStudent]);
+  // State for success and error messages
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
+  // Validate form inputs
+  const validateForm = () => {
+    if (!formData.name.trim()) {
+      setError("Name is required.");
+      return false;
+    }
+    if (!formData.class.trim()) {
+      setError("Class is required.");
+      return false;
+    }
+    if (!formData.contact.trim()) {
+      setError("Contact is required.");
+      return false;
+    }
+    if (!/^\d{10}$/.test(formData.contact)) {
+      setError("Contact must be a valid 10-digit number.");
+      return false;
+    }
+    if (!formData.studentId.trim()) {
+      setError("Student ID is required.");
+      return false;
+    }
+    if (!formData.location.trim()) {
+      setError("Location is required.");
+      return false;
+    }
+    return true;
+  };
+
+  // Handle input change and update the form state
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setError(""); // Clear the error when the user starts typing
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({ ...formData, image: reader.result }); // Set base64 string for image
-      };
-      reader.readAsDataURL(file); // Convert the file to base64
-    }
-  };
-
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!token) {
-      alert('You must be logged in to perform this action.');
-      return;
-    }
+    setError("");
+    setSuccess("");
+
+    if (!validateForm()) return; // Validate the form inputs before submission
 
     try {
-      if (studentId) {
-        // Update student
-        const updatedStudent = await apiUpdateStudent(studentId, formData, token);
-        dispatch(updateStudent(updatedStudent)); // Dispatch Redux action
-      } else {
-        // Add new student
-        const newStudent = await apiAddStudent(formData, token);
-        dispatch(addStudent(newStudent)); // Dispatch Redux action
-      }
+      // Call the API to add a new student
+      const newStudent = await apiAddStudent(formData);
+      dispatch(addStudent(newStudent)); // Dispatch the action to add the student in Redux
+      setSuccess("Student added successfully!");
+
+      // Reset the form after submission
       setFormData({
-        name: '',
-        class: '',
-        contact: '',
-        admissionNumber: '',
-        location: '',
-        image: '',
-      }); // Reset the form
-    } catch (error) {
-      console.error('Error handling student data:', error);
-    }
-  };
+        name: "",
+        class: "",
+        contact: "",
+        studentId: "",
+        location: "",
+      });
 
-  const handleDelete = async () => {
-    if (!token) {
-      alert('You must be logged in to delete this student.');
-      return;
-    }
-
-    try {
-      await apiDeleteStudent(studentId, token); // Delete student via API
-      dispatch(deleteStudent(studentId)); // Dispatch Redux action
-    } catch (error) {
-      console.error('Error deleting student:', error);
+    } catch (err) {
+      setError(err.response?.data?.message || "Error adding student.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow">
-      <InputField
-        label="Name"
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        placeholder="Enter student name"
-      />
-      <InputField
-        label="Class"
-        type="text"
-        name="class"
-        value={formData.class}
-        onChange={handleChange}
-        placeholder="Enter student class"
-      />
-      <InputField
-        label="Contact"
-        type="text"
-        name="contact"
-        value={formData.contact}
-        onChange={handleChange}
-        placeholder="Enter contact number"
-      />
-      <InputField
-        label="Admission Number"
-        type="text"
-        name="admissionNumber"
-        value={formData.admissionNumber}
-        onChange={handleChange}
-        placeholder="Enter admission number"
-      />
-      <InputField
-        label="Location"
-        type="text"
-        name="location"
-        value={formData.location}
-        onChange={handleChange}
-        placeholder="Enter location"
-      />
+    <Layout title="Add Student">
+    <div className="flex justify-center items-center ">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded shadow-lg w-96"
+      >
+        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        {success && <p className="text-green-500 text-center mb-4">{success}</p>}
 
-      {/* Image Upload Field */}
-      <div className="mb-4">
-        <label className="block text-gray-700">Student Image</label>
-        <input
-          type="file"
-          name="image"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="mt-1 block w-full text-sm text-gray-500"
+        {/* Name Field */}
+        <InputField
+          label="Name"
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Enter student name"
         />
-        {formData.image && (
-          <img src={formData.image} alt="Student" className="mt-2 w-24 h-24 object-cover" />
-        )}
-      </div>
 
-      <button type="submit" className="btn-primary mt-4">
-        {studentId ? 'Update Student' : 'Add Student'}
-      </button>
+        {/* Class Field */}
+        <InputField
+          label="Class"
+          type="text"
+          name="class"
+          value={formData.class}
+          onChange={handleChange}
+          placeholder="Enter class"
+        />
 
-      {studentId && (
-        <button
-          type="button"
-          onClick={handleDelete}
-          className="btn-danger mt-4 ml-4"
-        >
-          Delete Student
+        {/* Contact Field */}
+        <InputField
+          label="Contact"
+          type="text"
+          name="contact"
+          value={formData.contact}
+          onChange={handleChange}
+          placeholder="Enter contact number"
+        />
+
+        {/* Student ID Field */}
+        <InputField
+          label="Student ID"
+          type="text"
+          name="studentId"
+          value={formData.studentId}
+          onChange={handleChange}
+          placeholder="Enter Student ID"
+        />
+
+        {/* Location Field */}
+        <InputField
+          label="Location"
+          type="text"
+          name="location"
+          value={formData.location}
+          onChange={handleChange}
+          placeholder="Enter location"
+        />
+
+        {/* Submit Button */}
+        <button type="submit" className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded btn-primary w-full">
+          Add Student
         </button>
-      )}
-    </form>
+      </form>
+    </div>
+    </Layout>
   );
 };
 

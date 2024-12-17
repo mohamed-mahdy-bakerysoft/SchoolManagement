@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import InputField from '../components/Shared/InputField';
-import { useDispatch } from 'react-redux';
-import { login } from '../redux/slices/authSlice'; // Import the login action
-import { login as apiLogin } from '../api/auth'; // Import the login API function
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import InputField from "../../components/Shared/InputField";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/slices/authSlice"; // Import the login action
+import { login as apiLogin } from "../../api/auth"; // Import the login API function
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const LoginPage = () => {
 
     // Validate fields
     if (!email || !password) {
-      setError('Email and Password are required.');
+      setError("Email and Password are required.");
       return;
     }
 
@@ -29,15 +29,17 @@ const LoginPage = () => {
       dispatch(login({ user, token }));
 
       // Redirect to the dashboard after login
-      navigate('/dashboard');
+      navigate("/dashboard");
     } catch (err) {
-      console.error('Login error:', err);
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      console.error("Login error:", err);
+      setError(
+        err.response?.data?.message || "Login failed. Please try again."
+      );
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gray-200">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded shadow-lg w-96"
@@ -63,10 +65,7 @@ const LoginPage = () => {
           placeholder="Enter your password"
         />
 
-        <button
-          type="submit"
-          className="btn-primary w-full mt-4"
-        >
+        <button type="submit" className="btn-primary w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
           Login
         </button>
       </form>

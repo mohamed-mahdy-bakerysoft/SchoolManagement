@@ -1,12 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   students: [],
   currentStudent: null,
+  loading: false,
+  error: null,
 };
 
 const studentSlice = createSlice({
-  name: 'student',
+  name: "student",
   initialState,
   reducers: {
     setStudents: (state, action) => {
@@ -19,17 +21,30 @@ const studentSlice = createSlice({
       state.students.push(action.payload);
     },
     updateStudent: (state, action) => {
-      const index = state.students.findIndex((student) => student.id === action.payload.id);
-      if (index !== -1) {
-        state.students[index] = action.payload;
-      }
+      state.currentStudent = { ...state.currentStudent, ...action.payload }; // Update student details in state
     },
     deleteStudent: (state, action) => {
-      state.students = state.students.filter((student) => student.id !== action.payload);
+      state.students = state.students.filter(
+        (student) => student.studentId !== action.payload
+      );
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
     },
   },
 });
 
-export const { setStudents, setCurrentStudent, addStudent, updateStudent, deleteStudent } = studentSlice.actions;
+export const {
+  setStudents,
+  setCurrentStudent,
+  addStudent,
+  updateStudent,
+  deleteStudent,
+  setLoading,
+  setError,
+} = studentSlice.actions;
 
 export default studentSlice.reducer;

@@ -1,27 +1,33 @@
 const express = require("express");
 const router = express.Router();
 const {
-getAllStudents,
+  getAllStudents,
   addStudent,
   updateStudent,
   deleteStudent,
-  getStudentByAdmissionNumber
+  getStudentBystudentId,
 } = require("../controllers/studentController");
-const { verifyAdmin, verifyStaff , verifyAdminOrStaff } = require("../middlewares/authMiddleware");
+const {
+  verifyAdmin,
+  verifyStaff,
+  verifyAdminOrStaff,
+  verifyLibrarian,
+  verifyAll,
+} = require("../middlewares/authMiddleware");
 
 // get All student
-router.get("/students", verifyAdminOrStaff , getAllStudents); // Route to get all students
+router.get("/", verifyAdminOrStaff, getAllStudents); // Route to get all students
 
 // Add student (POST)
-router.post("/students", verifyAdminOrStaff, addStudent);  // Only Admin can add student
+router.post("/", verifyAdminOrStaff, addStudent);
 
 // get one student
-router.get("/students/:admissionNumber", verifyAdminOrStaff, getStudentByAdmissionNumber);
+router.get("/:studentId", verifyAll, getStudentBystudentId);
 
 // Update student (PUT)
-router.put("/students/:admissionNumber", verifyAdminOrStaff, updateStudent); // Both Admin and Staff can update student
+router.put("/:studentId", verifyAdminOrStaff , updateStudent); // Both Admin and Staff can update student
 
 // Delete student (DELETE)
-router.delete("/students/:admissionNumber", verifyAdminOrStaff, deleteStudent); // Both Admin and Staff can delete student
+router.delete("/:studentId", verifyAdminOrStaff, deleteStudent); // Both Admin and Staff can delete student
 
 module.exports = router;
