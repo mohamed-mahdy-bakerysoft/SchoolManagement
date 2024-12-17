@@ -88,16 +88,20 @@ const BookList = ({ token }) => {
 
   return (
     <Layout title="List of Books">
-    <div className="p-4">
-      <ReusableTable columns={columns} data={processedBooks} actions={actions} />
+      <div className="p-4">
+        <ReusableTable
+          columns={columns}
+          data={processedBooks}
+          actions={actions}
+        />
 
-      <ConfirmationModal
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
-        onConfirm={handleDeleteConfirm}
-        message={`Are you sure you want to delete the book "${bookToDelete?.bookName}"?`}
-      />
-    </div>
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          onConfirm={handleDeleteConfirm}
+          message={`Are you sure you want to delete the book "${bookToDelete?.bookName}"?`}
+        />
+      </div>
     </Layout>
   );
 };

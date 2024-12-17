@@ -23,7 +23,11 @@ const StudentDetailsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { currentStudent: studentDetails, loading, error } = useSelector((state) => state.student);
+  const {
+    currentStudent: studentDetails,
+    loading,
+    error,
+  } = useSelector((state) => state.student);
   const currentUserRole = useSelector((state) => state.auth.user.role);
 
   const [success, setSuccess] = useState("");
@@ -116,7 +120,8 @@ const StudentDetailsPage = () => {
   };
 
   if (loading) return <p className="text-center">Loading student details...</p>;
-  if (!studentDetails) return <p className="text-center">No student details found.</p>;
+  if (!studentDetails)
+    return <p className="text-center">No student details found.</p>;
 
   const fields = [
     { label: "Name", name: "name", type: "text" },
@@ -142,13 +147,15 @@ const StudentDetailsPage = () => {
             link={`/libraryrecords/${studentId}`}
           />
 
-{!isLibrarian &&<ReusableCard
-            title="Fee Records"
-            description="View fee payment history for this student."
-            icon={FaMoneyBillAlt}
-            iconColor="text-green-500"
-            link={`/fee/feehistory/${studentId}`}
-          />}
+          {!isLibrarian && (
+            <ReusableCard
+              title="Fee Records"
+              description="View fee payment history for this student."
+              icon={FaMoneyBillAlt}
+              iconColor="text-green-500"
+              link={`/fee/feehistory/${studentId}`}
+            />
+          )}
         </div>
 
         {/* Student Form */}
@@ -156,7 +163,9 @@ const StudentDetailsPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {fields.map(({ label, name, type, disabled }) => (
               <div key={name}>
-                <label className="block text-sm font-medium text-gray-700">{label}</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  {label}
+                </label>
                 <input
                   name={name}
                   type={type}
@@ -167,7 +176,9 @@ const StudentDetailsPage = () => {
                     errors[name] ? "border-red-500" : "border-gray-300"
                   } rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                 />
-                {errors[name] && <p className="text-red-500 text-sm mt-1">{errors[name]}</p>}
+                {errors[name] && (
+                  <p className="text-red-500 text-sm mt-1">{errors[name]}</p>
+                )}
               </div>
             ))}
           </div>
@@ -175,7 +186,10 @@ const StudentDetailsPage = () => {
           <div className="flex flex-col sm:flex-row sm:space-x-4 mt-4">
             {!isLibrarian && (
               <>
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded w-full sm:w-auto">
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded w-full sm:w-auto"
+                >
                   Save Changes
                 </button>
                 <button

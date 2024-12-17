@@ -25,7 +25,7 @@ router.post("/", verifyAdminOrStaff, addStudent);
 router.get("/:studentId", verifyAll, getStudentBystudentId);
 
 // Update student (PUT)
-router.put("/:studentId", verifyAdminOrStaff , updateStudent); // Both Admin and Staff can update student
+router.put("/:studentId", verifyAdminOrStaff, updateStudent); // Both Admin and Staff can update student
 
 // Delete student (DELETE)
 router.delete("/:studentId", verifyAdminOrStaff, deleteStudent); // Both Admin and Staff can delete student

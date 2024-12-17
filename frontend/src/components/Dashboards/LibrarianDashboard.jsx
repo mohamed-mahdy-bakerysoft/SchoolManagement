@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../Layout/Layout";
 import ReusableCard from "../Shared/ReusableCard";
 import { BiSolidBookAdd } from "react-icons/bi";
-import { FaListAlt,FaBook,FaHistory } from "react-icons/fa";
+import { FaListAlt, FaBook, FaHistory } from "react-icons/fa";
 const LibrarianDashboard = () => {
   return (
     <Layout title="Welcome, Librarian!">
@@ -24,23 +24,23 @@ const LibrarianDashboard = () => {
           iconColor="text-green-500"
           link="/library/booklist"
         />
-      {/* Card 1: Record Management */}
-      <ReusableCard
-        title="Borrow/Return Book"
-        description="Enter library records."
-        icon={FaBook}
-        iconColor="text-blue-500"
-        link="/library/addrecords"
-      />
+        {/* Card 1: Record Management */}
+        <ReusableCard
+          title="Borrow/Return Book"
+          description="Enter library records."
+          icon={FaBook}
+          iconColor="text-blue-500"
+          link="/library/addrecords"
+        />
 
-      {/* Card 2: Transaction History */}
-      <ReusableCard
-        title="Transaction History"
-        description="View borrowing and return history."
-        icon={FaHistory}
-        iconColor="text-green-500"
-        link="/library/libraryrecords"
-      />
+        {/* Card 2: Transaction History */}
+        <ReusableCard
+          title="Transaction History"
+          description="View borrowing and return history."
+          icon={FaHistory}
+          iconColor="text-green-500"
+          link="/library/libraryrecords"
+        />
       </div>
     </Layout>
   );

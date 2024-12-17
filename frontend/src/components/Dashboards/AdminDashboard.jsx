@@ -2,9 +2,8 @@ import React from "react";
 import Layout from "../Layout/Layout";
 import ReusableCard from "../Shared/ReusableCard";
 import { HiUserAdd, HiUserGroup } from "react-icons/hi"; // Import icons
-import {IoLibrary } from "react-icons/io5";
-import {FaMoneyCheckAlt} from "react-icons/fa";
-
+import { IoLibrary } from "react-icons/io5";
+import { FaMoneyCheckAlt,FaUserCog,FaUserPlus } from "react-icons/fa";
 
 const AdminDashboard = () => {
   return (
@@ -44,11 +43,28 @@ const AdminDashboard = () => {
           link="/librarianlist"
           iconColor="text-orange-500"
         />
+        <ReusableCard
+          title="Add Student"
+          description="Add a new student to the system."
+          icon={FaUserPlus}
+          iconColor="text-blue-500"
+          link="/students/studentform"
+        />
+
+        {/* Manage Students */}
+        <ReusableCard
+          title="Manage Students"
+          description="View, edit, or delete student records."
+          icon={FaUserCog}
+          iconColor="text-green-500"
+          link="/students/studentlist"
+        />
+
         {/* Library Records Card */}
         <ReusableCard
           title="Library Records"
           description="View library records"
-          icon={IoLibrary } // Add user icon
+          icon={IoLibrary} // Add user icon
           link="/libraryrecords"
           iconColor="text-blue-500"
         />

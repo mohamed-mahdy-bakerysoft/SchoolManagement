@@ -65,7 +65,10 @@ const LoginPage = () => {
           placeholder="Enter your password"
         />
 
-        <button type="submit" className="btn-primary w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+        <button
+          type="submit"
+          className="btn-primary w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+        >
           Login
         </button>
       </form>

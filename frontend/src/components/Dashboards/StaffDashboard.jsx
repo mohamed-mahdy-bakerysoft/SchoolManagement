@@ -1,32 +1,34 @@
 import React from "react";
 import Layout from "../Layout/Layout";
 import ReusableCard from "../Shared/ReusableCard"; // Import the reusable card
-import { FaBook, FaHistory, FaUserPlus, FaUserCog, FaMoneyCheckAlt } from "react-icons/fa"; // Import icons
+import {
+  FaBook,
+  FaHistory,
+  FaUserPlus,
+  FaUserCog,
+  FaMoneyCheckAlt,
+} from "react-icons/fa"; // Import icons
 
 const StaffDashboard = () => {
   return (
     <Layout title="Welcome, Office Staff!">
       <div className="p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-        
-        
-          <ReusableCard
-            title="Add Fee"
-            description="Add new fee records to the system."
-            icon={FaMoneyCheckAlt }
-            iconColor="text-blue-500"
-            link="/fee/addfee"
-          />
+        <ReusableCard
+          title="Add Fee"
+          description="Add new fee records to the system."
+          icon={FaMoneyCheckAlt}
+          iconColor="text-blue-500"
+          link="/fee/addfee"
+        />
 
-        
-          <ReusableCard
-            title="Fee History"
-            description="View and manage fee payment history."
-            icon={FaHistory}
-            iconColor="text-orange-500"
-            link="/fee/feehistory"
-          />
+        <ReusableCard
+          title="Fee History"
+          description="View and manage fee payment history."
+          icon={FaHistory}
+          iconColor="text-orange-500"
+          link="/fee/feehistory"
+        />
 
-        
         <div onClick={() => navigate("/students/studentform")}>
           <ReusableCard
             title="Add Student"
@@ -46,7 +48,7 @@ const StaffDashboard = () => {
             link="/students/studentlist"
           />
         </div>
-        
+
         <ReusableCard
           title="Library Records"
           description="View library records."
@@ -54,11 +56,6 @@ const StaffDashboard = () => {
           iconColor="text-blue-500"
           link="/library"
         />
-
-        
-
-
-        
       </div>
     </Layout>
   );

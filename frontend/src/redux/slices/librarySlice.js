@@ -1,7 +1,7 @@
 // src/store/slices/librarySlice.js
 
-import { createSlice } from '@reduxjs/toolkit';
-import { addBook as addBookApi } from '../../api/book';  // Import the addBook API
+import { createSlice } from "@reduxjs/toolkit";
+import { addBook as addBookApi } from "../../api/book"; // Import the addBook API
 
 const initialState = {
   books: [],
@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const librarySlice = createSlice({
-  name: 'library',
+  name: "library",
   initialState,
   reducers: {
     setBooks: (state, action) => {
@@ -35,6 +35,12 @@ const librarySlice = createSlice({
   },
 });
 
-export const { setBooks, setTransactions, addTransaction, updateBookStatus, addBook } = librarySlice.actions;
+export const {
+  setBooks,
+  setTransactions,
+  addTransaction,
+  updateBookStatus,
+  addBook,
+} = librarySlice.actions;
 
 export default librarySlice.reducer;

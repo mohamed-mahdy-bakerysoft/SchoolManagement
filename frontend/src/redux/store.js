@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './slices/authSlice';
-import studentReducer from './slices/studentSlice';
-import libraryReducer from './slices/librarySlice';
-import feesReducer from './slices/feesSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./slices/authSlice";
+import studentReducer from "./slices/studentSlice";
+import libraryReducer from "./slices/librarySlice";
+import feesReducer from "./slices/feesSlice";
 
 const store = configureStore({
   reducer: {

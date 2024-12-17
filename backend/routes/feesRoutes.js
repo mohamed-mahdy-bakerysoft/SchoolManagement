@@ -24,12 +24,20 @@ router.post("/", verifyAdminOrStaff, createFeesRecord);
 router.get("/:studentId", verifyAdminOrStaff, getFeesHistoryById);
 
 // Get fees record by transactionId (GET)
-router.get("/transaction/:transactionId", verifyAdminOrStaff, getFeesRecordByTransactionId);
+router.get(
+  "/transaction/:transactionId",
+  verifyAdminOrStaff,
+  getFeesRecordByTransactionId
+);
 
 // Update a fees record by transactionId (PUT)
 router.put("/transaction/:transactionId", verifyAdminOrStaff, updateFeesRecord);
 
 // Delete a fees record by transactionId (DELETE)
-router.delete("/transaction/:transactionId", verifyAdminOrStaff, deleteFeesRecord);
+router.delete(
+  "/transaction/:transactionId",
+  verifyAdminOrStaff,
+  deleteFeesRecord
+);
 
 module.exports = router;

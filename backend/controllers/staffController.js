@@ -42,41 +42,42 @@ exports.getStaffByStaffId = async (req, res) => {
 
 // Controller to update staff details
 exports.updateStaff = async (req, res) => {
-    const { staffId } = req.params; // Use `staffId` from the request parameters
-    const { name, email, role } = req.body; // Get the data to update from the request body
-  
-    try {
-      // Find the staff member by staffId
-      const staff = await User.findOne({ staffId });
-      if (!staff) {
-        return res.status(404).json({ message: "Staff member not found" });
-      }
-  
-      // If the email is being updated, check for duplicates
-      if (email && email !== staff.email) {
-        const emailExists = await User.findOne({ email });
-        if (emailExists) {
-          return res.status(400).json({ message: "Email is already in use by another user" });
-        }
-        staff.email = email; // Update email if no duplicates found
-      }
-  
-      // Update other fields
-      staff.name = name || staff.name;
-      staff.role = role || staff.role;
-  
-      await staff.save(); // Save updated staff data
-  
-      res
-        .status(200)
-        .json({ message: "Staff details updated successfully", staff });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error updating staff details", error: error.message });
+  const { staffId } = req.params; // Use `staffId` from the request parameters
+  const { name, email, role } = req.body; // Get the data to update from the request body
+
+  try {
+    // Find the staff member by staffId
+    const staff = await User.findOne({ staffId });
+    if (!staff) {
+      return res.status(404).json({ message: "Staff member not found" });
     }
-  };
-  
+
+    // If the email is being updated, check for duplicates
+    if (email && email !== staff.email) {
+      const emailExists = await User.findOne({ email });
+      if (emailExists) {
+        return res
+          .status(400)
+          .json({ message: "Email is already in use by another user" });
+      }
+      staff.email = email; // Update email if no duplicates found
+    }
+
+    // Update other fields
+    staff.name = name || staff.name;
+    staff.role = role || staff.role;
+
+    await staff.save(); // Save updated staff data
+
+    res
+      .status(200)
+      .json({ message: "Staff details updated successfully", staff });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error updating staff details", error: error.message });
+  }
+};
 
 // Controller to delete a staff member
 exports.deleteStaff = async (req, res) => {

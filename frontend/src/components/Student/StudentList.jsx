@@ -58,14 +58,13 @@ const StudentList = ({ token }) => {
     },
   ];
 
-  
   if (error) return <p className="text-red-500">{error}</p>;
 
   return (
     <Layout title="Student List">
-    <div>
-      <ReusableTable columns={columns} data={students} actions={actions} />
-    </div>
+      <div>
+        <ReusableTable columns={columns} data={students} actions={actions} />
+      </div>
     </Layout>
   );
 };

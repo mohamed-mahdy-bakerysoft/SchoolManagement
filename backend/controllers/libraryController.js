@@ -7,22 +7,36 @@ exports.addBook = async (req, res) => {
   const { bookId, bookName, author } = req.body;
 
   if (!bookId || !bookName || !author) {
-    return res.status(400).json({ message: "All fields are required: bookId, bookName, author" });
+    return res
+      .status(400)
+      .json({ message: "All fields are required: bookId, bookName, author" });
   }
 
   try {
     const existingBook = await LibraryBook.findOne({ bookId });
     if (existingBook) {
-      return res.status(400).json({ message: "A book with this ID already exists" });
+      return res
+        .status(400)
+        .json({ message: "A book with this ID already exists" });
     }
 
-    const newBook = new LibraryBook({ bookId, bookName, author, status: "Available" });
+    const newBook = new LibraryBook({
+      bookId,
+      bookName,
+      author,
+      status: "Available",
+    });
     await newBook.save();
 
     res.status(201).json({ message: "Book added successfully", book: newBook });
   } catch (error) {
     console.error("Error adding book:", error);
-    res.status(500).json({ message: "Internal server error while adding book", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Internal server error while adding book",
+        error: error.message,
+      });
   }
 };
 
@@ -31,7 +45,9 @@ exports.borrowBook = async (req, res) => {
   const { studentId, bookId } = req.body;
 
   if (!studentId || !bookId) {
-    return res.status(400).json({ message: "Both studentId and bookId are required" });
+    return res
+      .status(400)
+      .json({ message: "Both studentId and bookId are required" });
   }
 
   try {
@@ -45,7 +61,9 @@ exports.borrowBook = async (req, res) => {
       return res.status(404).json({ message: "Book not found" });
     }
     if (book.status !== "Available") {
-      return res.status(400).json({ message: "Book is not available for borrowing" });
+      return res
+        .status(400)
+        .json({ message: "Book is not available for borrowing" });
     }
 
     book.status = studentId; // Assigning studentId to indicate the book is borrowed
@@ -61,7 +79,12 @@ exports.borrowBook = async (req, res) => {
     res.json({ message: "Book borrowed successfully", book, transaction });
   } catch (error) {
     console.error("Error borrowing book:", error);
-    res.status(500).json({ message: "Internal server error while borrowing book", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Internal server error while borrowing book",
+        error: error.message,
+      });
   }
 };
 
@@ -79,7 +102,9 @@ exports.returnBook = async (req, res) => {
       return res.status(404).json({ message: "Book not found" });
     }
     if (book.status === "Available") {
-      return res.status(400).json({ message: "Book is not currently borrowed" });
+      return res
+        .status(400)
+        .json({ message: "Book is not currently borrowed" });
     }
 
     const studentId = book.status;
@@ -97,7 +122,12 @@ exports.returnBook = async (req, res) => {
     res.json({ message: "Book returned successfully", book, transaction });
   } catch (error) {
     console.error("Error returning book:", error);
-    res.status(500).json({ message: "Internal server error while returning book", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Internal server error while returning book",
+        error: error.message,
+      });
   }
 };
 
@@ -108,7 +138,12 @@ exports.fetchBooks = async (req, res) => {
     res.json(books);
   } catch (error) {
     console.error("Error fetching books:", error);
-    res.status(500).json({ message: "Internal server error while fetching books", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Internal server error while fetching books",
+        error: error.message,
+      });
   }
 };
 
@@ -122,7 +157,12 @@ exports.fetchAllTransactions = async (req, res) => {
     res.json(transactions);
   } catch (error) {
     console.error("Error fetching transactions:", error);
-    res.status(500).json({ message: "Internal server error while fetching transactions", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Internal server error while fetching transactions",
+        error: error.message,
+      });
   }
 };
 
@@ -135,17 +175,26 @@ exports.fetchTransactionsByStudentId = async (req, res) => {
   }
 
   try {
-    const transactions = await LibraryTransaction.find({ studentId })
-      .populate("bookId", "bookName author");
+    const transactions = await LibraryTransaction.find({ studentId }).populate(
+      "bookId",
+      "bookName author"
+    );
 
     if (transactions.length === 0) {
-      return res.status(404).json({ message: "No transactions found for the student" });
+      return res
+        .status(404)
+        .json({ message: "No transactions found for the student" });
     }
 
     res.json(transactions);
   } catch (error) {
     console.error("Error fetching transactions:", error);
-    res.status(500).json({ message: "Internal server error while fetching transactions", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Internal server error while fetching transactions",
+        error: error.message,
+      });
   }
 };
 
@@ -166,6 +215,11 @@ exports.deleteBook = async (req, res) => {
     res.json({ message: "Book deleted successfully", deletedBook });
   } catch (error) {
     console.error("Error deleting book:", error);
-    res.status(500).json({ message: "Internal server error while deleting book", error: error.message });
+    res
+      .status(500)
+      .json({
+        message: "Internal server error while deleting book",
+        error: error.message,
+      });
   }
 };

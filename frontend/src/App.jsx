@@ -35,8 +35,6 @@ const App = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const userRole = useSelector((state) => state.auth.user?.role);
 
- 
-
   return (
     <Router>
       <Routes>
@@ -52,24 +50,44 @@ const App = () => {
             {userRole === "admin" && (
               <>
                 <Route path="/dashboard" element={<AdminDashboard />} />
-                <Route path="/admin/OfficeStaff" element={<OfficeStaffManagement />} />
+                <Route
+                  path="/admin/OfficeStaff"
+                  element={<OfficeStaffManagement />}
+                />
                 <Route path="/admin/register" element={<RegisterUserPage />} />
                 <Route path="/officestafflist" element={<StaffListPage />} />
                 <Route path="/staff/:id" element={<StaffDetailsPage />} />
-                <Route path="/admin/Librarian" element={<LibrarianManagement />} />
+                <Route
+                  path="/admin/Librarian"
+                  element={<LibrarianManagement />}
+                />
                 <Route path="/librarianlist" element={<LibrarianListPage />} />
                 <Route path="/students" element={<StudentManagement />} />
                 <Route path="/students/studentform" element={<StudentForm />} />
                 <Route path="/students/studentlist" element={<StudentList />} />
-                <Route path="/students/:studentId" element={<StudentDetailsPage />} />
+                <Route
+                  path="/students/:studentId"
+                  element={<StudentDetailsPage />}
+                />
                 <Route path="/fee/addfee" element={<FeesRemarksCreate />} />
                 <Route path="/fee/feehistory" element={<FeesHistory />} />
-                <Route path="/transactions/:transactionId" element={<FeesRemarksCreate />} />
-                <Route path="/libraryrecords" element={<TransactionHistory />} />
+                <Route
+                  path="/transactions/:transactionId"
+                  element={<FeesRemarksCreate />}
+                />
+                <Route
+                  path="/libraryrecords"
+                  element={<TransactionHistory />}
+                />
                 <Route path="/feesrecords" element={<FeesHistory />} />
-                <Route path="/fee/feehistory/:studentId" element={<FeesHistory />} />
-                <Route path="/libraryrecords/:studentId" element={<TransactionHistory />} />
-
+                <Route
+                  path="/fee/feehistory/:studentId"
+                  element={<FeesHistory />}
+                />
+                <Route
+                  path="/libraryrecords/:studentId"
+                  element={<TransactionHistory />}
+                />
               </>
             )}
 
@@ -80,14 +98,29 @@ const App = () => {
                 <Route path="/students" element={<StudentManagement />} />
                 <Route path="/students/studentform" element={<StudentForm />} />
                 <Route path="/students/studentlist" element={<StudentList />} />
-                <Route path="/students/:studentId" element={<StudentDetailsPage />} />
+                <Route
+                  path="/students/:studentId"
+                  element={<StudentDetailsPage />}
+                />
                 <Route path="/fee" element={<FeesManagement />} />
                 <Route path="/fee/addfee" element={<FeesRemarksCreate />} />
                 <Route path="/fee/feehistory" element={<FeesHistory />} />
-                <Route path="/fee/feehistory/:studentId" element={<FeesHistory />} />
-                <Route path="/transactions/:transactionId" element={<FeesRemarksCreate />} />
-                <Route path="/libraryrecords/:studentId" element={<TransactionHistory />} />
-                <Route path="/libraryrecords" element={<TransactionHistory />} />
+                <Route
+                  path="/fee/feehistory/:studentId"
+                  element={<FeesHistory />}
+                />
+                <Route
+                  path="/transactions/:transactionId"
+                  element={<FeesRemarksCreate />}
+                />
+                <Route
+                  path="/libraryrecords/:studentId"
+                  element={<TransactionHistory />}
+                />
+                <Route
+                  path="/libraryrecords"
+                  element={<TransactionHistory />}
+                />
               </>
             )}
 
@@ -98,12 +131,23 @@ const App = () => {
                 <Route path="/library" element={<LibraryManagement />} />
                 <Route path="/library/addbooks" element={<AddBook />} />
                 <Route path="/library/booklist" element={<BookList />} />
-                <Route path="/library/managerecords" element={<LibraryRecordManagement />} />
-                <Route path="/students/:studentId" element={<StudentDetailsPage />} />
-                <Route path="/library/libraryrecords" element={<TransactionHistory />} />
+                <Route
+                  path="/library/managerecords"
+                  element={<LibraryRecordManagement />}
+                />
+                <Route
+                  path="/students/:studentId"
+                  element={<StudentDetailsPage />}
+                />
+                <Route
+                  path="/library/libraryrecords"
+                  element={<TransactionHistory />}
+                />
                 <Route path="/library/addrecords" element={<BookAction />} />
-                <Route path="/libraryrecords/:studentId" element={<TransactionHistory />} />
-
+                <Route
+                  path="/libraryrecords/:studentId"
+                  element={<TransactionHistory />}
+                />
               </>
             )}
 

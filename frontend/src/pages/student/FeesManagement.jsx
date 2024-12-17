@@ -1,5 +1,5 @@
 import React from "react";
-import { FaMoneyCheckAlt , FaHistory } from "react-icons/fa"; // Icons for Add Fee and Fee History
+import { FaMoneyCheckAlt, FaHistory } from "react-icons/fa"; // Icons for Add Fee and Fee History
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import ReusableCard from "../../components/Shared/ReusableCard"; // Reusable Card component
@@ -15,7 +15,7 @@ const FeesManagement = () => {
           <ReusableCard
             title="Add Fee"
             description="Add new fee records to the system."
-            icon={FaMoneyCheckAlt }
+            icon={FaMoneyCheckAlt}
             iconColor="text-blue-500"
             link="/fee/addfee"
           />

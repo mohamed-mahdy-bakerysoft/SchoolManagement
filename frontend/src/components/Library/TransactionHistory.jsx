@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import ReusableTable from "../Shared/ReusableTable";
 import { setTransactions } from "../../redux/slices/librarySlice";
-import { fetchAllTransactions, fetchTransactionsByStudentId } from "../../api/book";
+import {
+  fetchAllTransactions,
+  fetchTransactionsByStudentId,
+} from "../../api/book";
 import Layout from "../Layout/Layout";
 
 const TransactionHistory = ({ token }) => {
@@ -20,7 +23,10 @@ const TransactionHistory = ({ token }) => {
         let transactionsData;
 
         if (studentId) {
-          transactionsData = await fetchTransactionsByStudentId(studentId, token);
+          transactionsData = await fetchTransactionsByStudentId(
+            studentId,
+            token
+          );
         } else {
           transactionsData = await fetchAllTransactions(token);
         }
@@ -41,9 +47,9 @@ const TransactionHistory = ({ token }) => {
 
   // Columns configuration
   const columns = [
-    { 
-      key: "studentId", 
-      label: "Student ID" 
+    {
+      key: "studentId",
+      label: "Student ID",
     },
     { key: "bookId", label: "Book ID" },
     { key: "action", label: "Action" },

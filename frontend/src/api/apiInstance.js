@@ -1,12 +1,12 @@
-import axios from 'axios';
-import  store  from '../redux/store'; // Import the Redux store to access state
-import { logout } from '../redux/slices/authSlice'; // Import the logout action
+import axios from "axios";
+import store from "../redux/store"; // Import the Redux store to access state
+import { logout } from "../redux/slices/authSlice"; // Import the logout action
 
 // Create an Axios instance with the base URL
 const apiInstance = axios.create({
-  baseURL: 'http://localhost:5000/',  // Base URL: http://localhost:5000/
+  baseURL: "http://localhost:5000/", // Base URL: http://localhost:5000/
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -19,7 +19,7 @@ apiInstance.interceptors.request.use(
 
     // If token exists, add it to the Authorization header
     if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
 
     return config;

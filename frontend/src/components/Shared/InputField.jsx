@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 
-const InputField = ({ label, type, value, onChange, placeholder, name, disabled }) => {
+const InputField = ({
+  label,
+  type,
+  value,
+  onChange,
+  placeholder,
+  name,
+  disabled,
+}) => {
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
 
   // Toggle show/hide password

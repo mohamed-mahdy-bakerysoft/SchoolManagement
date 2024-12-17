@@ -81,7 +81,6 @@ const StudentForm = () => {
         studentId: "",
         location: "",
       });
-
     } catch (err) {
       setError(err.response?.data?.message || "Error adding student.");
     }
@@ -89,70 +88,75 @@ const StudentForm = () => {
 
   return (
     <Layout title="Add Student">
-    <div className="flex justify-center items-center ">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded shadow-lg w-96"
-      >
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        {success && <p className="text-green-500 text-center mb-4">{success}</p>}
+      <div className="flex justify-center items-center ">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-8 rounded shadow-lg w-96"
+        >
+          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {success && (
+            <p className="text-green-500 text-center mb-4">{success}</p>
+          )}
 
-        {/* Name Field */}
-        <InputField
-          label="Name"
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Enter student name"
-        />
+          {/* Name Field */}
+          <InputField
+            label="Name"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Enter student name"
+          />
 
-        {/* Class Field */}
-        <InputField
-          label="Class"
-          type="text"
-          name="class"
-          value={formData.class}
-          onChange={handleChange}
-          placeholder="Enter class"
-        />
+          {/* Class Field */}
+          <InputField
+            label="Class"
+            type="text"
+            name="class"
+            value={formData.class}
+            onChange={handleChange}
+            placeholder="Enter class"
+          />
 
-        {/* Contact Field */}
-        <InputField
-          label="Contact"
-          type="text"
-          name="contact"
-          value={formData.contact}
-          onChange={handleChange}
-          placeholder="Enter contact number"
-        />
+          {/* Contact Field */}
+          <InputField
+            label="Contact"
+            type="text"
+            name="contact"
+            value={formData.contact}
+            onChange={handleChange}
+            placeholder="Enter contact number"
+          />
 
-        {/* Student ID Field */}
-        <InputField
-          label="Student ID"
-          type="text"
-          name="studentId"
-          value={formData.studentId}
-          onChange={handleChange}
-          placeholder="Enter Student ID"
-        />
+          {/* Student ID Field */}
+          <InputField
+            label="Student ID"
+            type="text"
+            name="studentId"
+            value={formData.studentId}
+            onChange={handleChange}
+            placeholder="Enter Student ID"
+          />
 
-        {/* Location Field */}
-        <InputField
-          label="Location"
-          type="text"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          placeholder="Enter location"
-        />
+          {/* Location Field */}
+          <InputField
+            label="Location"
+            type="text"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            placeholder="Enter location"
+          />
 
-        {/* Submit Button */}
-        <button type="submit" className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded btn-primary w-full">
-          Add Student
-        </button>
-      </form>
-    </div>
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded btn-primary w-full"
+          >
+            Add Student
+          </button>
+        </form>
+      </div>
     </Layout>
   );
 };

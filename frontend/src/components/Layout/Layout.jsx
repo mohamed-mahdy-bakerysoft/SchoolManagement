@@ -12,9 +12,10 @@ const roleBasedLinks = {
     { label: "Library Records", path: "/libraryrecords" },
     { label: "Fees History", path: "/feesrecords" },
   ],
-  Librarian: [    { label: "Dashboard", path: "/dashboard" },
+  Librarian: [
+    { label: "Dashboard", path: "/dashboard" },
     { label: "Manage Books", path: "/library" },
-    { label: "Manage Records", path: "/library/managerecords" }
+    { label: "Manage Records", path: "/library/managerecords" },
   ],
   "Office Staff": [
     { label: "Dashboard", path: "/dashboard" },

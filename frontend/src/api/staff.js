@@ -1,34 +1,36 @@
-import apiInstance from './apiInstance';
+import apiInstance from "./apiInstance";
 
 // Fetch all office staff
 export const fetchAllStaff = async (token) => {
   try {
-    const response = await apiInstance.get('/api/staff/officestaff', {
+    const response = await apiInstance.get("/api/staff/officestaff", {
       headers: {
         Authorization: `Bearer ${token}`, // Pass token in headers
       },
     });
     return response.data; // Return staff data
   } catch (error) {
-    console.error('Error fetching staff:', error); // Log the error
-    throw new Error(error.response?.data?.message || 'Failed to fetch staff');
+    console.error("Error fetching staff:", error); // Log the error
+    throw new Error(error.response?.data?.message || "Failed to fetch staff");
   }
 };
 
 // Fetch all librarian
 export const fetchAllLibrarian = async (token) => {
-    try {
-      const response = await apiInstance.get('/api/staff/librarians', {
-        headers: {
-          Authorization: `Bearer ${token}`, // Pass token in headers
-        },
-      });
-      return response.data; // Return staff data
-    } catch (error) {
-      console.error('Error fetching librarians:', error); // Log the error
-      throw new Error(error.response?.data?.message || 'Failed to fetch librarians');
-    }
-  };
+  try {
+    const response = await apiInstance.get("/api/staff/librarians", {
+      headers: {
+        Authorization: `Bearer ${token}`, // Pass token in headers
+      },
+    });
+    return response.data; // Return staff data
+  } catch (error) {
+    console.error("Error fetching librarians:", error); // Log the error
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch librarians"
+    );
+  }
+};
 
 // Fetch staff details by staffId
 export const fetchStaffById = async (staffId, token) => {
@@ -40,8 +42,10 @@ export const fetchStaffById = async (staffId, token) => {
     });
     return response.data; // Return staff details
   } catch (error) {
-    console.error('Fetch staff info error:', error); // Log the error
-    throw new Error(error.response?.data?.message || 'Fetching staff info failed');
+    console.error("Fetch staff info error:", error); // Log the error
+    throw new Error(
+      error.response?.data?.message || "Fetching staff info failed"
+    );
   }
 };
 
@@ -64,8 +68,10 @@ export const updateStaff = async (staffId, staffDetails, token) => {
     );
     return response.data; // Return updated staff data
   } catch (error) {
-    console.error('Error updating staff:', error); // Log the error
-    throw new Error(error.response?.data?.message || 'Failed to update staff details');
+    console.error("Error updating staff:", error); // Log the error
+    throw new Error(
+      error.response?.data?.message || "Failed to update staff details"
+    );
   }
 };
 
@@ -79,7 +85,9 @@ export const deleteStaff = async (staffId, token) => {
     });
     return response.data; // Return success message
   } catch (error) {
-    console.error('Error deleting staff:', error); // Log the error
-    throw new Error(error.response?.data?.message || 'Failed to delete staff member');
+    console.error("Error deleting staff:", error); // Log the error
+    throw new Error(
+      error.response?.data?.message || "Failed to delete staff member"
+    );
   }
 };

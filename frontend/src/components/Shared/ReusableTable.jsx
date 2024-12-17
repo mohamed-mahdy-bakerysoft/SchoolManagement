@@ -41,15 +41,19 @@ const ReusableTable = ({ columns, data, actions }) => {
                 ))}
                 {actions?.length > 0 && (
                   <td className="px-6 py-4 whitespace-nowrap">
-                    {actions.map(({ label, onClick, className }, actionIndex) => (
-                      <button
-                        key={actionIndex}
-                        className={`text-sm text-blue-600 hover:text-blue-800 underline mr-2 ${className || ""}`}
-                        onClick={() => onClick(row)}
-                      >
-                        {label}
-                      </button>
-                    ))}
+                    {actions.map(
+                      ({ label, onClick, className }, actionIndex) => (
+                        <button
+                          key={actionIndex}
+                          className={`text-sm text-blue-600 hover:text-blue-800 underline mr-2 ${
+                            className || ""
+                          }`}
+                          onClick={() => onClick(row)}
+                        >
+                          {label}
+                        </button>
+                      )
+                    )}
                   </td>
                 )}
               </tr>

@@ -21,24 +21,25 @@ export const addStudent = async (studentData, token) => {
 
 // Update an existing student
 export const updateStudent = async (studentId, studentData, token) => {
-    try {
-      const response = await apiInstance.put(
-        `/api/students/${studentId}`, // API endpoint to update a student by Student ID
-        studentData, // Send student data in the request body
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Pass token in headers
-          },
-        }
-      );
-      return response.data; // Return updated student data
-    } catch (error) {
-      console.error('Error updating student:', error);
-      // Throw error with backend message or default message
-      throw new Error(error.response?.data?.message || 'Failed to update student.');
-    }
-  };
-  
+  try {
+    const response = await apiInstance.put(
+      `/api/students/${studentId}`, // API endpoint to update a student by Student ID
+      studentData, // Send student data in the request body
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Pass token in headers
+        },
+      }
+    );
+    return response.data; // Return updated student data
+  } catch (error) {
+    console.error("Error updating student:", error);
+    // Throw error with backend message or default message
+    throw new Error(
+      error.response?.data?.message || "Failed to update student."
+    );
+  }
+};
 
 // Delete a student
 export const deleteStudent = async (studentId, token) => {

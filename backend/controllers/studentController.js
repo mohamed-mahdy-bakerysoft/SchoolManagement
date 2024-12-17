@@ -4,7 +4,9 @@ const Student = require("../models/Student.js"); // Assuming you're using Mongoo
 const getAllStudents = async (req, res) => {
   try {
     const students = await Student.find(); // Fetch all students
-    res.status(200).json({ message: "Students retrieved successfully", students });
+    res
+      .status(200)
+      .json({ message: "Students retrieved successfully", students });
   } catch (error) {
     console.error("Error fetching students:", error);
     res.status(500).json({ message: "Failed to retrieve students" });
@@ -26,7 +28,9 @@ const getStudentBystudentId = async (req, res) => {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    res.status(200).json({ message: "Student retrieved successfully", student });
+    res
+      .status(200)
+      .json({ message: "Student retrieved successfully", student });
   } catch (error) {
     console.error("Error fetching student:", error);
     res.status(500).json({ message: "Failed to retrieve student" });
@@ -36,7 +40,13 @@ const getStudentBystudentId = async (req, res) => {
 // Controller to add a student
 const addStudent = async (req, res) => {
   try {
-    const { name, class: studentClass, contact, studentId, location } = req.body;
+    const {
+      name,
+      class: studentClass,
+      contact,
+      studentId,
+      location,
+    } = req.body;
 
     // Input validation
     if (!name || !studentClass || !contact || !studentId || !location) {
@@ -44,13 +54,19 @@ const addStudent = async (req, res) => {
     }
 
     if (!/^\d{10}$/.test(contact)) {
-      return res.status(400).json({ message: "Contact must be a valid 10-digit number" });
+      return res
+        .status(400)
+        .json({ message: "Contact must be a valid 10-digit number" });
     }
 
     // Check if studentId is unique
     const existingStudent = await Student.findOne({ studentId });
     if (existingStudent) {
-      return res.status(400).json({ message: "Student ID already exists. Please use a unique ID." });
+      return res
+        .status(400)
+        .json({
+          message: "Student ID already exists. Please use a unique ID.",
+        });
     }
 
     // Create a new student
@@ -63,7 +79,9 @@ const addStudent = async (req, res) => {
     });
 
     await newStudent.save(); // Save the student to the database
-    res.status(201).json({ message: "Student added successfully", student: newStudent });
+    res
+      .status(201)
+      .json({ message: "Student added successfully", student: newStudent });
   } catch (error) {
     console.error("Error adding student:", error);
     res.status(500).json({ message: "Failed to add student" });
@@ -77,11 +95,15 @@ const updateStudent = async (req, res) => {
 
     // Input validation
     if (!name || !studentClass || !contact || !location) {
-      return res.status(400).json({ message: "All fields are required for update" });
+      return res
+        .status(400)
+        .json({ message: "All fields are required for update" });
     }
 
     if (!/^\d{10}$/.test(contact)) {
-      return res.status(400).json({ message: "Contact must be a valid 10-digit number" });
+      return res
+        .status(400)
+        .json({ message: "Contact must be a valid 10-digit number" });
     }
 
     const { studentId } = req.params;

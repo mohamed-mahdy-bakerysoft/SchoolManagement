@@ -1,11 +1,11 @@
-import apiInstance from './apiInstance'; // Import the API instance
+import apiInstance from "./apiInstance"; // Import the API instance
 
 // Add a new fees remark
 export const addFeesRemark = async (feesData, token) => {
   try {
     console.log(feesData);
     const response = await apiInstance.post(
-      '/api/fees', // API endpoint to add a new fees remark
+      "/api/fees", // API endpoint to add a new fees remark
       feesData,
       {
         headers: {
@@ -15,8 +15,10 @@ export const addFeesRemark = async (feesData, token) => {
     );
     return response.data; // Return the added fees remark data
   } catch (error) {
-    console.error('Error adding fees remark:', error);
-    throw new Error(error.response?.data?.message || 'Failed to add fees remark');
+    console.error("Error adding fees remark:", error);
+    throw new Error(
+      error.response?.data?.message || "Failed to add fees remark"
+    );
   }
 };
 
@@ -34,8 +36,10 @@ export const updateFeesRecordapi = async (transactionId, formData, token) => {
     );
     return response.data; // Return updated fees record data
   } catch (error) {
-    console.error('Error updating fees record:', error);
-    throw new Error(error.response?.data?.message || 'Failed to update fees record');
+    console.error("Error updating fees record:", error);
+    throw new Error(
+      error.response?.data?.message || "Failed to update fees record"
+    );
   }
 };
 
@@ -52,23 +56,27 @@ export const deleteFeesRecordapi = async (transactionId, token) => {
     );
     return response.data; // Return success message
   } catch (error) {
-    console.error('Error deleting fees record:', error);
-    throw new Error(error.response?.data?.message || 'Failed to delete fees record');
+    console.error("Error deleting fees record:", error);
+    throw new Error(
+      error.response?.data?.message || "Failed to delete fees record"
+    );
   }
 };
 
 // Get all fees records
 export const fetchFeesHistory = async (token) => {
   try {
-    const response = await apiInstance.get('/api/fees', {
+    const response = await apiInstance.get("/api/fees", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     return response.data; // Return list of all fees records
   } catch (error) {
-    console.error('Error fetching fees records:', error);
-    throw new Error(error.response?.data?.message || 'Failed to fetch fees records');
+    console.error("Error fetching fees records:", error);
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch fees records"
+    );
   }
 };
 
@@ -85,8 +93,10 @@ export const fetchFeesRecordByTransactionId = async (transactionId, token) => {
     );
     return response.data; // Return fees record data
   } catch (error) {
-    console.error('Error fetching fees record:', error);
-    throw new Error(error.response?.data?.message || 'Failed to fetch fees record');
+    console.error("Error fetching fees record:", error);
+    throw new Error(
+      error.response?.data?.message || "Failed to fetch fees record"
+    );
   }
 };
 
@@ -103,9 +113,9 @@ export const fetchFeesByStudentId = async (studentId, token) => {
     );
     return response.data; // Return fees history for the student
   } catch (error) {
-    console.error('Error fetching student fees history:', error);
+    console.error("Error fetching student fees history:", error);
     throw new Error(
-      error.response?.data?.message || 'Failed to fetch student fees history'
+      error.response?.data?.message || "Failed to fetch student fees history"
     );
   }
 };
